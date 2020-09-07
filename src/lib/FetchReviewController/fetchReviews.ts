@@ -1,5 +1,6 @@
 import { getText, getAttr, getHtml, handleRes } from "../util";
-import { ReviewResponse, Review } from "../../types/";
+import { ReviewResponse, Review, APIReviewsOptions } from "../../types/";
+import qs from "query-string";
 /**
  * Gets JS object based on HTML widget
  * @param doc parsed document
@@ -8,10 +9,15 @@ import { ReviewResponse, Review } from "../../types/";
 const $ = (querySelector: string, item: Document | Element) =>
   item.querySelector(querySelector);
 
-export const fetchReviews = (query: string): Promise<ReviewResponse | null> =>
-  fetch(`https://judge.me/reviews/reviews_for_widget?${query}`)
+export const fetchReviews = (
+  options: APIReviewsOptions
+): Promise<ReviewResponse | null> => {
+  return fetch(
+    `https://judge.me/reviews/reviews_for_widget?${qs.stringify(options)}`
+  )
     .then((res) => handleRes(res))
     .then((res) => (res?.html ? getDataFromHTML(res.html) : null));
+};
 
 export const getDataFromHTML = (html: string) => {
   const doc = getHtml(html);

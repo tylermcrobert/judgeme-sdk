@@ -1,15 +1,22 @@
-import { apiLink, getHtml, getAttr } from "../util";
-import { RatingAverages } from "../../types/";
-export const fetchAverage = ({
-  external_id,
-  shop_domain,
-}: {
-  external_id: string | number;
-  shop_domain: string;
-}): Promise<RatingAverages | null> => {
-  return fetch(
-    apiLink("/api/v1/widgets/product_review", { external_id, shop_domain })
-  )
+import { getHtml, getAttr } from "../util";
+import { APIAverageWidgetParams, RatingAverages } from "../../types";
+import { ProductController } from "../..";
+import qs from "query-string";
+
+const URL = "https://judge.me/api/v1/widgets/product_review";
+
+export const fetchAverage = (
+  controller: ProductController
+): Promise<RatingAverages | null> => {
+  const options: APIAverageWidgetParams = {
+    api_token: controller.judgeMe.storeInfo.publicToken,
+    shop_domain: controller.judgeMe.storeInfo.shopDomain,
+    external_id: controller.id,
+  };
+
+  const params = qs.stringify(options);
+
+  return fetch(`${URL}?${params}`)
     .then((res) => res.json())
     .then((res) => (res.widget ? parseAveragesFromWidget(res.widget) : null));
 };
@@ -19,7 +26,7 @@ export const fetchAverage = ({
  * @param widgetHtml Widget HTML
  */
 
-function parseAveragesFromWidget(widgetHtml: string) {
+function parseAveragesFromWidget(widgetHtml: string): RatingAverages {
   const doc = getHtml(widgetHtml);
   const histogram = Array.from(doc.querySelectorAll(".jdgm-histogram__row"))
     .map((item) => ({

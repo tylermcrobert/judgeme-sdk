@@ -3,42 +3,46 @@ import {
   ReviewSortMethod,
   ProductReviewData,
   RatingAverages,
+  StoreInfo,
 } from "../../types/";
 import { fetchReviews } from "./fetchReviews";
 import { fetchAverage } from "./fetchAverage";
+import { ProductController } from "../../index";
 
 import qs from "query-string";
 
 export class FetchReviewController {
+  product: ProductController;
   options: APIReviewsOptions;
   averages: RatingAverages | null;
 
-  constructor(storeInfo: APIReviewsOptions) {
-    this.options = storeInfo;
+  constructor(product: ProductController) {
     this.averages = null;
+    this.product = product;
+    this.options = {
+      per_page: 5,
+      product_id: product.id,
+      shop_domain: product.judgeMe.storeInfo.shopDomain,
+      platform: product.judgeMe.storeInfo.platform,
+    };
   }
 
   /**
    * Fetches histogram averages
    */
   async fetchReviewsAverage() {
-    // if (this.averages) return this.averages;
-
-    // const averages = await fetchAverage({
-    //   external_id: this.options.product_id,
-    //   shop_domain: this.options.shop_domain,
-    // });
-    // this.averages = averages;
-    return null;
+    if (this.averages) return this.averages;
+    const averages = await fetchAverage(this.product);
+    this.averages = averages;
+    return averages;
   }
 
   /**
    * Fetch Reviews
    */
   async fetch(): Promise<ProductReviewData> {
-    const query = qs.stringify(this.options);
     const averages = await this.fetchReviewsAverage();
-    const reviewData = await fetchReviews(query);
+    const reviewData = await fetchReviews(this.options);
     const combinedData = { averages, reviewData };
     return combinedData;
   }

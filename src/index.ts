@@ -37,7 +37,7 @@ export class JudgeMeController {
   product = (id: ProductId) => new ProductController(this, id);
 }
 
-class ProductController {
+export class ProductController {
   judgeMe: JudgeMeController;
   id: ProductId;
 
@@ -54,8 +54,8 @@ class ProductController {
     const url = `https://judge.me/api/cf_answers/form_data_for_widget?`;
 
     const params = {
-      url: this.judgeMe.storeInfo.shop_domain,
-      shop_domain: this.judgeMe.storeInfo.shop_domain,
+      url: this.judgeMe.storeInfo.shopDomain,
+      shop_domain: this.judgeMe.storeInfo.shopDomain,
       platform: this.judgeMe.storeInfo.platform,
       product_id: this.id,
     };
@@ -68,19 +68,14 @@ class ProductController {
    * @param params Settings for review
    */
 
-  getReviews = () =>
-    new FetchReviewController({
-      product_id: this.id,
-      ...this.judgeMe.storeInfo,
-      per_page: 5,
-    });
+  getReviews = () => new FetchReviewController(this);
 
   async postReview(payload: ReviewPostPayload) {
     const params: ReviewPostParams = {
       ...payload,
       id: this.id,
       platform: this.judgeMe.storeInfo.platform,
-      url: this.judgeMe.storeInfo.shop_domain,
+      url: this.judgeMe.storeInfo.shopDomain,
     };
 
     return fetch(`https://judge.me/api/v1/reviews?${qs.stringify(params)}`, {
