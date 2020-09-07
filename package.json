@@ -1,10 +1,11 @@
 {
-  "name": "judgeme",
-  "version": "1.0.0",
+  "name": "@tylermcrobert/judgeme-wrapper",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm publish --access public"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +16,11 @@
     "env": {},
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "querystring": "^0.2.0"
   }
 }
