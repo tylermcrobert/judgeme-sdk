@@ -15,7 +15,6 @@ export const fetchReviews = (query: string): Promise<ReviewResponse | null> =>
 
 export const getDataFromHTML = (html: string) => {
   const doc = getHtml(html);
-  console.log(doc);
 
   /** Meta */
   const $nextPage = doc.querySelector(".jdgm-paginate__next-page");
