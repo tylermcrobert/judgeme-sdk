@@ -3,7 +3,7 @@ import {
   ReviewSortMethod,
   ProductReviewData,
   RatingAverages,
-} from "../../types";
+} from "../../types/";
 import { fetchReviews } from "./fetchReviews";
 import { fetchAverage } from "./fetchAverage";
 
@@ -22,14 +22,14 @@ export class FetchReviewController {
    * Fetches histogram averages
    */
   async fetchReviewsAverage() {
-    if (this.averages) return this.averages;
+    // if (this.averages) return this.averages;
 
-    const averages = await fetchAverage({
-      external_id: this.options.product_id,
-      shop_domain: this.options.shop_domain,
-    });
-    this.averages = averages;
-    return averages;
+    // const averages = await fetchAverage({
+    //   external_id: this.options.product_id,
+    //   shop_domain: this.options.shop_domain,
+    // });
+    // this.averages = averages;
+    return null;
   }
 
   /**

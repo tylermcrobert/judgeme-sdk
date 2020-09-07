@@ -1,5 +1,5 @@
 import { apiLink, getHtml, getAttr } from "../util";
-import { RatingAverages } from "../../types";
+import { RatingAverages } from "../../types/";
 export const fetchAverage = ({
   external_id,
   shop_domain,

@@ -1,5 +1,5 @@
 import { getText, getAttr, getHtml, handleRes } from "../util";
-import { ReviewResponse, Review } from "../../types";
+import { ReviewResponse, Review } from "../../types/";
 /**
  * Gets JS object based on HTML widget
  * @param doc parsed document
