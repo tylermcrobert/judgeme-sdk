@@ -6,7 +6,7 @@ import {
   ReviewQuestions,
   ReviewPostParams,
 } from "./types";
-import qs from "querystring";
+import qs from "query-string";
 
 import { FetchReviewController } from "./lib/FetchReviewController";
 import { handleRes } from "./lib/util";

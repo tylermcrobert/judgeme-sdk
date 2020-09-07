@@ -1,25 +1,18 @@
 {
   "name": "@tylermcrobert/judgeme-wrapper",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
-  "peerDependencies": {
-    "react": ">=16.9.0"
-  },
-  "bit": {
-    "env": {},
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
-  },
   "devDependencies": {
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "querystring": "^0.2.0"
+    "query-string": "^6.13.1"
   }
 }
