@@ -8,7 +8,9 @@ Create a new instance of JudgeMe to initialize.
 
 ```js
 const judgeMe = new JudgeMeController({
-  shop_domain: "judge-me-demo-store.myshopify.com",
+  platform: "shopify",
+  shopDomain: "judge-me-demo-store.myshopify.com",
+  publicToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
 });
 ```
 
@@ -16,7 +18,7 @@ const judgeMe = new JudgeMeController({
 
 ### Initialize Product
 
-To get reviews for a product, start by initializing the product.
+To get reviews for a product, start by initializing the product with the `.product()`. method on the JudgeMe controller
 
 ```js
 const PRODUCT_ID = "3784982364220";
