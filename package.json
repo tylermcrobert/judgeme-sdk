@@ -1,5 +1,5 @@
 {
-  "name": "@tylermcrobert/judgeme-wrapper",
+  "name": "@tylermcrobert/judgeme-sdk",
   "version": "0.5.1",
   "description": "",
   "main": "dist/index.js",
